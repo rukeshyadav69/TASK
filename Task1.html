@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Webpage Example</title>
+    <style>
+        body {
+            font-family: Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: #cb3c11;
+            background: linear-gradient(to right, #cb3611, #fcca25);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        main {
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-style: initial;
+        }
+
+        h2 {
+            color: #fc9825;
+            margin-top: 40px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        img {
+            width: 200px;
+            border: 3px solid #2575fc;
+            border-radius: 50%;
+            margin: 20px 0;
+        }
+
+        a {
+            display: inline-block;
+            margin: 15px 0;
+            text-decoration: none;
+            color: #2575fc;
+            font-weight: bold;
+        }
+
+        button {
+            background-color: #fca225;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #2acc1b;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>My Personal Webpage</h1>
+        <p>Learning HTML, CSS, and JavaScript</p>
+    </header>
+
+    <main>
+        <p>Hi! This is a simple webpage designed with basic web technologies.</p>
+        <button onclick="sayHello()">Say Hello</button>
+        <h2>About Computers</h2>
+        <p>A <strong>computer</strong> is an electronic device that processes information and performs tasks according
+            to a set of instructions called programs. It can store, retrieve, and process data very quickly, making it
+            an essential tool in our daily lives.</p>
+
+        <h2>Importance of Computers</h2>
+        <p>Computers are widely used in education, business, healthcare, research, and entertainment. They help us write
+            documents, analyze data, communicate with others, design new products, and even control machines.</p>
+
+        <h2>Types of Computers</h2>
+        <p>
+            1. <strong>Supercomputers</strong> – Extremely powerful machines used for scientific research, weather
+            forecasting, and space exploration.<br>
+            2. <strong>Mainframes</strong> – Large systems used by banks, airlines, and governments for handling massive
+            amounts of data.<br>
+            3. <strong>Personal Computers (PCs)</strong> – The most common type, used at home, schools, and offices.<br>
+            4. <strong>Laptops & Tablets</strong> – Portable computers for students and professionals.<br>
+            5. <strong>Embedded Systems</strong> – Computers built into devices like cars, washing machines, and
+            smartphones.
+        </p>
+
+        <h2>Future of Computers</h2>
+        <p>With advancements in <strong>Artificial Intelligence (AI), Quantum Computing, and Cloud Computing</strong>,
+            the future of computers is even more powerful, faster, and smarter. They will continue to shape the way we
+            live, work, and communicate.</p>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 My Webpage</p>
+    </footer>
+
+    <script>
+        function sayHello() {
+            alert("Hello there! Thanks for visiting my webpage.");
+        }
+    </script>
+</body>
+
+</html>
