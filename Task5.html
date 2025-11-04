@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Capstone App - Nova Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:#f5f9ff; --card:#fff; --text:#0f172a; --muted:#64748b;
+  --accent:#2563eb; --glass:rgba(255,255,255,0.7);
+}
+[data-theme="dark"] {
+  --bg:#0f172a; --card:#1e293b; --text:#f8fafc; --muted:#94a3b8;
+  --accent:#38bdf8; --glass:rgba(30,41,59,0.6);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body {
+  font-family:Inter,system-ui; line-height:1.5;
+  background:var(--bg); color:var(--text);
+  transition:background .3s,color .3s;
+}
+.container {max-width:1100px;margin:auto;padding:20px}
+.nav {display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.brand {display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
+.logo {width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--accent),#60a5fa);color:#fff}
+.navlinks {display:flex;gap:12px;align-items:center}
+.btn {
+  background:var(--accent);color:#fff;border:0;
+  padding:9px 14px;border-radius:8px;cursor:pointer;font-weight:600;
+  transition:transform .2s,background .3s;
+}
+.btn:hover {transform:translateY(-2px);background:#1d4ed8}
+.hero {display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:center;margin-bottom:24px}
+.card {
+  background:var(--card);border-radius:16px;padding:20px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);transition:background .3s,color .3s;
+}
+.hero h1{font-size:28px;margin-bottom:8px}
+.hero p{color:var(--muted)}
+.grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.project-card {
+  border-radius:14px;overflow:hidden;display:flex;flex-direction:column;
+  background:var(--glass);backdrop-filter:blur(6px);transition:transform .3s;
+}
+.project-card:hover {transform:translateY(-5px)}
+.thumb {width:100%;height:150px;object-fit:cover}
+.card-body {padding:12px;flex:1;display:flex;flex-direction:column;gap:6px}
+.meta {display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.rating {color:#fbbf24;font-size:14px}
+.controls {display:flex;gap:8px;margin-top:auto}
+input,textarea,select {
+  padding:10px;border-radius:8px;border:1px solid #cbd5e1;width:100%;background:#fff;
+}
+.footer {display:flex;justify-content:space-between;align-items:center;margin-top:20px;flex-wrap:wrap;gap:10px}
+.kpis {display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin:16px 0}
+.kpi {background:var(--glass);padding:12px;border-radius:10px;text-align:center}
+.kpi strong{font-size:20px;display:block}
+.switch {cursor:pointer}
+.toast {position:fixed;right:20px;bottom:20px;padding:12px 16px;
+  background:var(--accent);color:#fff;border-radius:10px;display:none}
+@media(max-width:850px){.hero{grid-template-columns:1fr}.navlinks{display:none}}
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="nav">
+    <div class="brand"><div class="logo">NP</div> NovaPortfolio</div>
+    <div class="navlinks">
+      <button class="btn" id="theme">🌙</button>
+      <button class="btn" id="launch">View Demo</button>
+    </div>
+  </nav>
+
+  <section class="hero card">
+    <div>
+      <h1>🚀 Final Capstone Project</h1>
+      <p>A modern, optimized, and responsive single-file portfolio app. Includes dark mode, KPIs, filters, animations, and more.</p>
+      <div class="kpis">
+        <div class="kpi"><strong>12k</strong><span>Visitors</span></div>
+        <div class="kpi"><strong>35+</strong><span>Projects</span></div>
+        <div class="kpi"><strong>4.8★</strong><span>Rating</span></div>
+      </div>
+      <input id="search" placeholder="Search projects..."/>
+    </div>
+    <aside>
+      <form id="contact">
+        <input id="name" placeholder="Name" required/>
+        <input id="email" type="email" placeholder="Email" required/>
+        <textarea id="message" rows="3" placeholder="Message"></textarea>
+        <button class="btn" type="submit">Send</button>
+      </form>
+    </aside>
+  </section>
+
+  <section class="card">
+    <h2 style="margin-bottom:10px">Project Gallery</h2>
+    <div class="grid" id="gallery">
+      <article class="project-card">
+        <img src="https://picsum.photos/seed/a/400/250" alt="Proj1" class="thumb"/>
+        <div class="card-body">
+          <div class="meta"><span>E-Commerce</span><span class="rating">★★★★★</span></div>
+          <strong>Shop App</strong>
+          <p class="small">Responsive store demo with cart & filters.</p>
+          <div class="controls"><button class="btn">Open</button></div>
+        </div>
+      </article>
+      <article class="project-card">
+        <img src="https://picsum.photos/seed/b/400/250" alt="Proj2" class="thumb"/>
+        <div class="card-body">
+          <div class="meta"><span>Portfolio</span><span class="rating">★★★★☆</span></div>
+          <strong>Designer Site</strong>
+          <p class="small">Personal portfolio template.</p>
+          <div class="controls"><button class="btn">Open</button></div>
+        </div>
+      </article>
+      <article class="project-card">
+        <img src="https://picsum.photos/seed/c/400/250" alt="Proj3" class="thumb"/>
+        <div class="card-body">
+          <div class="meta"><span>Tooling</span><span class="rating">★★★★★</span></div>
+          <strong>CI/CD Demo</strong>
+          <p class="small">Automated deployment pipeline.</p>
+          <div class="controls"><button class="btn">Open</button></div>
+        </div>
+      </article>
+    </div>
+    <div class="footer">
+      <span class="small">Tested on Chrome, Firefox, Safari.</span>
+      <button id="reset" class="btn">Reset Filters</button>
+    </div>
+  </section>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s)
+const toast=$("#toast")
+function show(msg,ms=2000){toast.textContent=msg;toast.style.display='block';clearTimeout(show._t);show._t=setTimeout(()=>toast.style.display='none',ms)}
+// Theme toggle with persistence
+const root=document.documentElement
+$("#theme").onclick=()=>{
+  if(root.dataset.theme==="dark"){delete root.dataset.theme;localStorage.removeItem("theme");$("#theme").textContent="🌙"}
+  else{root.dataset.theme="dark";localStorage.setItem("theme","dark");$("#theme").textContent="☀️"}
+}
+if(localStorage.getItem("theme")==="dark"){root.dataset.theme="dark";$("#theme").textContent="☀️"}
+// Contact form
+$("#contact").onsubmit=e=>{
+  e.preventDefault();show("📨 Message Sent!");e.target.reset()
+}
+// Search filter
+$("#search").oninput=e=>{
+  const v=e.target.value.toLowerCase()
+  $$("#gallery .project-card").forEach(c=>{
+    c.style.display=c.textContent.toLowerCase().includes(v)?"":"none"
+  })
+}
+// Reset
+$("#reset").onclick=()=>{$$("#gallery .project-card").forEach(c=>c.style.display="");show("Filters reset")}
+// Launch demo
+$("#launch").onclick=()=>show("🚀 Launching demo...")
+})();
+</script>
+</body>
+</html>
