@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full Project Implementation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #0073e6;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    nav {
+      margin: 20px;
+      text-align: center;
+    }
+    nav a {
+      margin: 10px;
+      padding: 10px 15px;
+      background: #0073e6;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    nav a:hover {
+      background: #005bb5;
+    }
+    section {
+      display: none;
+      padding: 20px;
+    }
+    .active {
+      display: block;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+      width: 350px;
+      margin: auto;
+    }
+    .input-section {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    #task-input {
+      flex: 1;
+      padding: 10px;
+    }
+    #task-list li {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+      padding: 5px;
+      background: #eee;
+      border-radius: 5px;
+    }
+    #product-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .product {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .controls {
+      margin: 20px 0;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Full Project Implementation</h1>
+    <p>Portfolio | To-Do | Products</p>
+  </header>
+
+  <nav>
+    <a href="#" onclick="showSection('portfolio')">Portfolio</a>
+    <a href="#" onclick="showSection('todo')">To-Do List</a>
+    <a href="#" onclick="showSection('products')">Products</a>
+  </nav>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="active">
+    <h2>About Me</h2>
+    <p>I’m a web developer learning HTML, CSS, and JavaScript 🚀.</p>
+
+    <h2>Projects</h2>
+    <ul>
+      <li>✔ To-Do List App</li>
+      <li>✔ Product Listing Page</li>
+      <li>✔ Responsive Portfolio</li>
+    </ul>
+
+    <h2>Contact</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required><br><br>
+      <input type="email" placeholder="Your Email" required><br><br>
+      <textarea placeholder="Message"></textarea><br><br>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <!-- To-Do Section -->
+  <section id="todo">
+    <div class="container">
+      <h2>📝 To-Do List</h2>
+      <div class="input-section">
+        <input type="text" id="task-input" placeholder="Enter a new task">
+        <button id="add-btn">Add</button>
+      </div>
+      <ul id="task-list"></ul>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section id="products">
+    <h2>🛒 Product Listing</h2>
+    <div class="controls">
+      <select id="filter-category">
+        <option value="all">All Categories</option>
+        <option value="electronics">Electronics</option>
+        <option value="clothing">Clothing</option>
+      </select>
+      <select id="sort-price">
+        <option value="default">Sort by Price</option>
+        <option value="low-high">Low → High</option>
+        <option value="high-low">High → Low</option>
+      </select>
+    </div>
+    <div id="product-container"></div>
+  </section>
+
+  <script>
+    // ===== NAVIGATION =====
+    function showSection(id) {
+      document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+
+    // ===== TO-DO LIST =====
+    const taskInput = document.getElementById("task-input");
+    const addBtn = document.getElementById("add-btn");
+    const taskList = document.getElementById("task-list");
+
+    if (addBtn) {
+      document.addEventListener("DOMContentLoaded", loadTasks);
+
+      addBtn.addEventListener("click", () => {
+        const task = taskInput.value.trim();
+        if (task === "") return alert("Please enter a task!");
+        addTask(task);
+        saveTask(task);
+        taskInput.value = "";
+      });
+    }
+
+    function addTask(taskText) {
+      const li = document.createElement("li");
+      li.innerHTML = `<span>${taskText}</span>
+        <button class="delete-btn">X</button>`;
+      li.querySelector(".delete-btn").addEventListener("click", () => {
+        li.remove();
+        removeTask(taskText);
+      });
+      taskList.appendChild(li);
+    }
+
+    function saveTask(task) {
+      let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      tasks.push(task);
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+
+    function loadTasks() {
+      let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      tasks.forEach(task => addTask(task));
+    }
+
+    function removeTask(taskText) {
+      let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      tasks = tasks.filter(task => task !== taskText);
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+
+    // ===== PRODUCTS =====
+    const products = [
+      { name: "Laptop", category: "electronics", price: 800 },
+      { name: "Smartphone", category: "electronics", price: 500 },
+      { name: "Jeans", category: "clothing", price: 40 },
+      { name: "T-Shirt", category: "clothing", price: 20 }
+    ];
+
+    const productContainer = document.getElementById("product-container");
+    const filterCategory = document.getElementById("filter-category");
+    const sortPrice = document.getElementById("sort-price");
+
+    if (productContainer) {
+      displayProducts(products);
+
+      filterCategory.addEventListener("change", filterAndSort);
+      sortPrice.addEventListener("change", filterAndSort);
+    }
+
+    function displayProducts(items) {
+      productContainer.innerHTML = "";
+      items.forEach(p => {
+        const div = document.createElement("div");
+        div.className = "product";
+        div.innerHTML = `<h3>${p.name}</h3><p>Category: ${p.category}</p><p>💲${p.price}</p>`;
+        productContainer.appendChild(div);
+      });
+    }
+
+    function filterAndSort() {
+      let filtered = [...products];
+      if (filterCategory.value !== "all") {
+        filtered = filtered.filter(p => p.category === filterCategory.value);
+      }
+      if (sortPrice.value === "low-high") {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (sortPrice.value === "high-low") {
+        filtered.sort((a, b) => b.price - a.price);
+      }
+      displayProducts(filtered);
+    }
+  </script>
+</body>
+</html>
